@@ -2,6 +2,7 @@
 #include <iostream>
 #include <iomanip>
 using namespace std;
+int* createArray( const int n);
 void* createArray(int n, int*& p);
 void freeMemory(int*& arr);
 void initRandomArray(int* beg, int* end, const int m = -10, const int M = 10);

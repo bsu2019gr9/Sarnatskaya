@@ -1,6 +1,13 @@
 #include "arrayfunctions.h"
 using namespace std; 
 
+int* createArray( const int n)
+{
+	int* arr = nullptr;
+	arr = new int[n];
+	return arr;
+}
+
 void* createArray(int n, int*& p) {
 	p = new (nothrow) int[n];
 	if (!p) exit(404);
