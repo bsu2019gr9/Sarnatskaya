@@ -16,12 +16,12 @@ void freeMemory(int*& arr)
 {
 	delete[] arr; arr = nullptr;
 }
-void initRandomArray(int* beg, int* end, const int m = -10, const int M = 10) {
+void initRandomArray(int* beg, int* end, const int m , const int M ) {
 	int d = (M - m + 1);
 	for (int* p = beg; p < end; ++p)
 		*p = rand() % d + m;
 }
-void initArray(int* beg, int* end, const int m = 0) {
+void initArray(int* beg, int* end, const int m ) {
 	for (int* p = beg; p < end; ++p)
 		*p = m;
 }
