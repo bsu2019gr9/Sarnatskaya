@@ -2,7 +2,7 @@
 #include <iostream>
 #include <cstring>
 using namespace std;
-void countWords(char* str, char letter);
+void task(char* str, char letter);
 
 //Определить количество слов в строке, которые начинаются на заданную букву.Вывести их на экран.
 
@@ -15,13 +15,13 @@ int main()
 	char letter;
 	cout << "Enter letter\n";
 	cin >> letter;
-	countWords(str, letter);
+	task(str, letter);
 	delete[] str;
 	str = nullptr;
 	system("pause");
 	return 0;
 }
-void countWords(char* str, char letter)
+void task(char* str, char letter)
 {
 	char* word = strtok(str, " .,:;`*/'#&!");
 	int count = 0;
