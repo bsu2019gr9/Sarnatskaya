@@ -20,10 +20,10 @@ public:
 	Parabola(const Parabola& other); //конструктор копирования!!!!!
 	~Parabola();//деструктор
 	Parabola operator=(const Parabola& rhs);    //оператор присваивания
-	Parabola operator+(const Parabola& rhs); //сложение
-	Parabola operator - (const Parabola& other); //вычитание
-	Parabola operator * (float t);
-	Parabola operator / (float t);
+	Parabola operator+=(const Parabola& rhs); //сложение
+	Parabola operator -= (const Parabola& other); //вычитание
+	Parabola operator *= (float t);
+	Parabola operator /= (float t);
 	void  seta(float t);
 	void  setb(float t);
 	void  setc(float t);
@@ -120,7 +120,7 @@ Parabola Parabola :: operator=(const Parabola& rhs)
 	findVertexY();
 	return *this;
 }
-Parabola Parabola :: operator+(const Parabola& rhs)
+Parabola Parabola :: operator+=(const Parabola& rhs)
 {
 	this->a += rhs.a;
 	if (!this->a) {
@@ -133,7 +133,7 @@ Parabola Parabola :: operator+(const Parabola& rhs)
 	findVertexY();
 	return Parabola(a, b, c);
 }
-Parabola Parabola :: operator - (const Parabola& rhs)
+Parabola Parabola :: operator -= (const Parabola& rhs)
 {
 	this->a -= rhs.a;
 	if (!this->a) {
@@ -146,7 +146,7 @@ Parabola Parabola :: operator - (const Parabola& rhs)
 	findVertexY();
 	return Parabola(a, b, c);
 }
-Parabola Parabola :: operator * (float t)
+Parabola Parabola :: operator *= (float t)
 {
 	this->a *= t;
 	if (!this->a) {
@@ -159,7 +159,7 @@ Parabola Parabola :: operator * (float t)
 	findVertexY();
 	return Parabola(a, b, c);
 }
-Parabola Parabola :: operator / (float t)
+Parabola Parabola :: operator /= (float t)
 {
 	if (!t) {
 		cout << "This parabola doesn't exist\n";
