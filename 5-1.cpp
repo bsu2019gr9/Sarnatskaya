@@ -14,7 +14,8 @@ private:
 	float vertexY;
 	void findVertexX() { this->vertexX = -this->b / (2 * this->a); };
 	void findVertexY() { vertexY = -(b * b - 4 * a * c) / (4 * a); };
-public:
+	void  findVertex();
+	public:
 	Parabola();   //конструктор без параметров!!!!!
 	Parabola(float tmp1, float tmp2, float tmp3);  //конструктор c параметрами!!!!!
 	Parabola(const Parabola& other); //конструктор копирования!!!!!
@@ -24,16 +25,20 @@ public:
 	Parabola operator -= (const Parabola& other); //вычитание
 	Parabola operator *= (float t);
 	Parabola operator /= (float t);
-	void  seta(float t);
-	void  setb(float t);
-	void  setc(float t);
-	void  findVertex();
+	Parabola operator+(const Parabola& rhs) const; //сложение
+	Parabola operator - (const Parabola& other) const; //вычитание
+	Parabola operator * (float t) const;
+	Parabola operator / (float t) const;
+	void  seta(float t);//НЕ const!!!!
+	void  setb(float t);//НЕ const!!!!
+	void  setc(float t);//НЕ const!!!!
+
 	void setall(float t, float m, float p);
-	float geta();
-	float getb();
-	float getc();
-	float getVertexX();
-	float getVertexY();
+	float geta() const;
+	float getb() const;
+	float getc() const;
+	float getVertexX() const;
+	float getVertexY()const;
 	friend  void operator<<(ostream& out, const Parabola& par);
 	friend void operator>>(istream& in, Parabola& par);
 };
@@ -43,7 +48,7 @@ Parabola fff3(Parabola& par) { return par; };
 
 
 int main()
-{
+{	const Parabola simplest(1,0,0); 
 	Parabola* p = new (nothrow) Parabola[5];
 	(*p).setall(5, 7, 2);
 	Parabola p1(3, 5, 7);
@@ -51,6 +56,7 @@ int main()
 	Parabola p2(1, 4, 6);
 	Parabola p3(9, 0, 15);
 	Parabola p4(1, 1, 1);
+ 	p4=simplest+p2;
 	cout << (*p + p1);
 	cout << '\n';
 	cout << (*(p + 1) - p1);
