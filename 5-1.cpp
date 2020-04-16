@@ -20,13 +20,19 @@ public:
 	Parabola(const Parabola& other); //конструктор копирования!!!!!
 	~Parabola();//деструктор
 	Parabola operator=(const Parabola& rhs);    //оператор присваивания
-	Parabola operator+(const Parabola& rhs); //сложение
-	Parabola operator - (const Parabola& other); //вычитание
-	Parabola operator * (float t);
-	Parabola operator / (float t);
-	void  seta(float t);
-	void  setb(float t);
-	void  setc(float t);
+	Parabola operator+(const Parabola& rhs) const; //сложение
+	Parabola operator - (const Parabola& rh) const; //вычитание
+	Parabola operator * (float number) const;
+	Parabola operator / (float number) const;
+	Parabola operator+=(const Parabola& rhs);
+	Parabola operator -= (const Parabola& rhs);
+	Parabola operator *= (float number);
+	Parabola operator /= (float number);
+	bool operator==(const Parabola& par) const;
+	bool operator!=(const Parabola& par) const;
+	void  seta(float number);
+	void  setb(float number);
+	void  setc(float number);
 	void  findVertex();
 	void setall(float t, float m, float p);
 	float geta();
@@ -41,23 +47,25 @@ Parabola fff1(Parabola par) { return par; };
 Parabola* fff2(Parabola* par) { return par; };
 Parabola fff3(Parabola& par) { return par; };
 
-
 int main()
 {
+
 	Parabola* p = new (nothrow) Parabola[5];
-	(*p).setall(5, 7, 2);
+	p[0].setall(5, 7, 2);
 	Parabola p1(3, 5, 7);
-	(*(p + 1)).setall(10, 10, 10);
+	p[1].setall(10, 10, 10);
 	Parabola p2(1, 4, 6);
 	Parabola p3(9, 0, 15);
 	Parabola p4(1, 1, 1);
-	cout << (*p + p1);
+	cout << (p[0] + p1);
 	cout << '\n';
-	cout << (*(p + 1) - p1);
+	cout << (p[1] - p1);
 	cout << '\n';
-	cout << (*p * 0);
+	cout << (p[1] += p1);
 	cout << '\n';
-	cout << (*(p + 1) / 2);
+	cout << (p[0] * 0);
+	cout << '\n';
+	cout << (p[1] / 2);
 	cout << '\n';
 	cout << fff1(p3);
 	cout << '\n';
@@ -120,69 +128,79 @@ Parabola Parabola :: operator=(const Parabola& rhs)
 	findVertexY();
 	return *this;
 }
-Parabola Parabola :: operator+(const Parabola& rhs)
+Parabola Parabola :: operator+(const Parabola& rhs) const
+{
+	return Parabola(a + rhs.a, b + rhs.b, c + rhs.a);
+}
+Parabola Parabola :: operator-(const Parabola& rhs) const
+{
+	return Parabola(a - rhs.a, b - rhs.b, c - rhs.c);
+}
+Parabola Parabola :: operator * (float number) const
+{
+	return Parabola(a * number, b * number, c * number);
+}
+Parabola Parabola :: operator / (float number) const
+{
+	return Parabola(a / number, b / number, c / number);
+}
+Parabola Parabola :: operator+=(const Parabola& rhs)
 {
 	this->a += rhs.a;
-	if (!this->a) {
-		cout << "This parabola doesn't exist\n";
-		a = 1;
-	}
 	this->b += rhs.b;
 	this->c += rhs.c;
 	findVertexX();
 	findVertexY();
-	return Parabola(a, b, c);
+	return *this;
 }
-Parabola Parabola :: operator - (const Parabola& rhs)
+Parabola Parabola :: operator -= (const Parabola& rhs)
 {
 	this->a -= rhs.a;
-	if (!this->a) {
-		cout << "This parabola doesn't exist\n";
-		a = 1;
-	}
 	this->b -= rhs.b;
 	this->c -= rhs.c;
 	findVertexX();
 	findVertexY();
-	return Parabola(a, b, c);
+	return *this;
 }
-Parabola Parabola :: operator * (float t)
+Parabola Parabola :: operator *= (float number)
 {
-	this->a *= t;
-	if (!this->a) {
-		cout << "This parabola doesn't exist\n";
-		a = 1;
-	}
-	this->b *= t;
-	this->c *= t;
+	this->a *= number;
+	this->b *= number;
+	this->c *= number;
 	findVertexX();
 	findVertexY();
-	return Parabola(a, b, c);
+	return *this;
 }
-Parabola Parabola :: operator / (float t)
+Parabola Parabola :: operator /= (float number)
 {
-	if (!t) {
+	if (!number) {
 		cout << "This parabola doesn't exist\n";
 		return Parabola(a, b, c);
 	}
-	this->a /= t;
-	this->b /= t;
-	this->c /= t;
+	this->a /= number;
+	this->b /= number;
+	this->c /= number;
 	findVertexX();
 	findVertexY();
-	return Parabola(a, b, c);
+	return *this;
 }
-void Parabola::seta(float t) {
-	a = t;
+bool Parabola::operator==(const Parabola& par) const {
+	return a == par.a && b == par.b && c == par.c;
+}
+bool Parabola::operator!=(const Parabola& par) const {
+	return !(par == *this);
+}
+void Parabola::seta(float number) {
+	a = number;
 	if (!a) {
 		cout << "This parabola doesn't exist\n";
 		a = 1;
 	}
 };
 
-void Parabola::setb(float t) { b = t; };
+void Parabola::setb(float number) { b = number; };
 
-void Parabola::setc(float t) { c = t; };
+void Parabola::setc(float number) { c = number; };
 
 void  Parabola::findVertex()
 {
@@ -190,14 +208,14 @@ void  Parabola::findVertex()
 	findVertexY();
 };
 
-void Parabola::setall(float t, float m, float p) {
-	a = t;
+void Parabola::setall(float a, float b, float c) {
+	this->a = a;
 	if (!a) {
 		cout << "This parabola doesn't exist\n";
 		a = 1;
 	}
-	b = m;
-	c = p;
+	this->b = b;
+	this->c = c;
 }
 
 
