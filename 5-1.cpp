@@ -34,7 +34,7 @@ public:
 	void  setb(float number);
 	void  setc(float number);
 	void  findVertex();
-	void setall(float t, float m, float p);
+	void setall(float a, float b, float c);
 	float geta();
 	float getb();
 	float getc();
